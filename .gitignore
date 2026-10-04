@@ -1,0 +1,8 @@
+# raw uploaded source photos & PDFs stay local (the deployed site uses assets/)
+/*.jpg
+/*.jpeg
+/*.webp
+/*.png
+/*.pdf
+.freebuff/
+Thumbs.db
