@@ -68,7 +68,7 @@ body::after{
 .section-head{
   display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);
   column-gap:clamp(28px,5vw,80px); align-items:end;
-  margin-bottom:clamp(38px,5.5vw,72px);
+  margin-bottom:clamp(30px,4vw,54px);
 }
 .section-head .eyebrow{grid-column:1/-1}
 .section-head h2{grid-column:1}
@@ -89,8 +89,8 @@ body::after{
   opacity:.72; margin-right:6px;
 }
 
-h1{font-size:clamp(2.8rem, 6.9vw, 5.65rem); line-height:1.02; letter-spacing:-.018em}
-h2{font-size:clamp(2.2rem, 4.9vw, 4.05rem); line-height:1.04; letter-spacing:-.016em}
+h1{font-size:clamp(2.25rem, 5.2vw, 4.35rem); line-height:1.05; letter-spacing:-.014em}
+h2{font-size:clamp(1.8rem, 3.7vw, 3.1rem); line-height:1.09; letter-spacing:-.012em}
 h1 em,h2 em{font-style:italic; font-weight:400; color:var(--lav-deep)}
 .uvled h1 em,.uvled h2 em,.contact h2 em{color:var(--lav)}
 .body-lg{font-size:clamp(1.02rem,1.35vw,1.16rem); line-height:1.75; color:var(--plum-soft); max-width:56ch}
@@ -164,7 +164,7 @@ h1 em,h2 em{font-style:italic; font-weight:400; color:var(--lav-deep)}
   height:100%; display:flex; align-items:center; justify-content:space-between; gap:24px;
 }
 .brand{display:flex; flex-direction:column; line-height:1}
-.brand-name{font-family:var(--serif); font-size:1.5rem; font-weight:500; letter-spacing:.02em}
+.brand-name{font-family:var(--serif); font-size:1.35rem; font-weight:500; letter-spacing:.02em}
 .brand-sub{font-size:.6rem; letter-spacing:.34em; text-transform:uppercase; color:var(--lav-deep); margin-top:5px}
 
 .main-nav ul{display:flex; gap:clamp(16px,2.2vw,32px)}
@@ -213,7 +213,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 .mobile-menu li{border-bottom:1px solid var(--line-soft)}
 .mobile-menu li a{
   display:block; padding:16px 0;
-  font-family:var(--serif); font-size:2rem; font-weight:500;
+  font-family:var(--serif); font-size:1.6rem; font-weight:500;
 }
 .mobile-menu li a em{font-style:italic; color:var(--lav-deep)}
 .mobile-menu-foot{display:flex; flex-direction:column; gap:8px; margin-top:32px; font-size:.95rem; color:var(--plum-soft)}
@@ -270,7 +270,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 .trust-item{padding:26px clamp(14px,2vw,28px) 34px; border-right:1px solid var(--line-soft)}
 .trust-item:first-child{padding-left:0}
 .trust-item:last-child{border-right:none}
-.trust-item h3{font-size:1.28rem; margin-bottom:6px}
+.trust-item h3{font-size:1.14rem; margin-bottom:6px}
 .trust-item p{font-size:.86rem; line-height:1.55; color:var(--plum-soft)}
 
 /* services marquee band */
@@ -290,7 +290,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    FEATURED EYELASH
    ============================================================ */
-.lashes{background:var(--lav-soft); padding:clamp(72px,10vw,140px) 0; margin-top:clamp(56px,8vw,110px)}
+.lashes{background:var(--lav-soft); padding:clamp(56px,7.5vw,108px) 0; margin-top:clamp(56px,8vw,110px)}
 .lashes-grid{
   display:grid; grid-template-columns:1.05fr .95fr;
   gap:clamp(36px,6vw,80px); align-items:center;
@@ -322,7 +322,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    UV-LED
    ============================================================ */
-.uvled{background:var(--char); color:var(--ivory); padding:clamp(72px,10vw,140px) 0; position:relative; overflow:hidden}
+.uvled{background:var(--char); color:var(--ivory); padding:clamp(56px,7.5vw,108px) 0; position:relative; overflow:hidden}
 .uvled::before{
   content:""; position:absolute; top:-30%; right:-10%;
   width:52vw; height:52vw; max-width:680px; max-height:680px;
@@ -338,7 +338,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   padding:7px 18px; border:1px solid rgba(201,188,216,.5); border-radius:100px;
   font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--lav);
 }
-.uvled h2{font-size:clamp(2.3rem,4.8vw,3.9rem); margin-bottom:26px}
+.uvled h2{font-size:clamp(1.85rem,3.6vw,2.9rem); margin-bottom:24px}
 .uvled .body-lg{color:rgba(248,244,238,.78); margin-bottom:34px}
 .uvled-media{
   position:relative;
@@ -355,7 +355,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    SERVICES INDEX
    ============================================================ */
-.services{padding:clamp(72px,10vw,140px) 0; position:relative}
+.services{padding:clamp(56px,7.5vw,108px) 0; position:relative}
 .service-index{border-top:1px solid var(--line)}
 .service-row{
   display:grid;
@@ -368,7 +368,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 .service-row:hover{background:rgba(236,230,240,.55)}
 .srv-num{font-family:var(--serif); font-style:italic; font-size:1.06rem; letter-spacing:.04em; color:var(--lav-deep)}
 .srv-name{
-  font-family:var(--serif); font-size:clamp(1.55rem,2.9vw,2.45rem); font-weight:500;
+  font-family:var(--serif); font-size:clamp(1.3rem,2.2vw,1.85rem); font-weight:500;
   transition:transform .45s var(--ease), color .3s;
 }
 .service-row:hover .srv-name{transform:translateX(10px); color:var(--lav-deep)}
@@ -394,7 +394,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    ABOUT
    ============================================================ */
-.about{background:var(--ivory-2); padding:clamp(72px,10vw,140px) 0}
+.about{background:var(--ivory-2); padding:clamp(56px,7.5vw,108px) 0}
 .about-grid{
   display:grid; grid-template-columns:.9fr 1.1fr;
   gap:clamp(36px,6vw,84px); align-items:center;
@@ -404,18 +404,18 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   margin-top:14px; font-size:.72rem; letter-spacing:.22em;
   text-transform:uppercase; color:var(--plum-soft);
 }
-.about-text h2{font-size:clamp(1.9rem,3.6vw,3rem); margin-bottom:24px}
+.about-text h2{font-size:clamp(1.65rem,2.9vw,2.4rem); margin-bottom:22px}
 .about-text .body-lg{margin-bottom:36px}
 .about-points{display:grid; grid-template-columns:1fr 1fr; gap:0}
 .about-points > div{padding:20px 26px 22px 0; border-top:1px solid var(--line)}
 .about-points > div:nth-child(even){padding-left:26px; border-left:1px solid var(--line-soft)}
-.about-points h4{font-size:1.12rem; margin-bottom:5px}
+.about-points h4{font-size:1.04rem; margin-bottom:5px}
 .about-points p{font-size:.85rem; line-height:1.6; color:var(--plum-soft)}
 
 /* ============================================================
    QUALIFICATIONS
    ============================================================ */
-.quals{padding:clamp(72px,10vw,140px) 0}
+.quals{padding:clamp(56px,7.5vw,108px) 0}
 .cert-strip{
   display:grid; grid-template-columns:repeat(6,1fr);
   gap:clamp(12px,1.6vw,22px); align-items:start;
@@ -444,7 +444,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    WORK / GALLERY
    ============================================================ */
-.work{background:var(--ivory-2); padding:clamp(72px,10vw,140px) 0}
+.work{background:var(--ivory-2); padding:clamp(56px,7.5vw,108px) 0}
 .gallery{
   display:grid; grid-template-columns:repeat(4,1fr);
   grid-auto-rows:clamp(170px,17vw,232px);
@@ -469,7 +469,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    PRICE LIST
    ============================================================ */
-.prices{padding:clamp(72px,10vw,140px) 0}
+.prices{padding:clamp(56px,7.5vw,108px) 0}
 .price-grid{
   display:grid; grid-template-columns:1fr 1fr;
   gap:clamp(34px,4.5vw,64px) clamp(40px,6vw,96px);
@@ -481,7 +481,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   box-shadow:0 18px 44px rgba(42,36,49,.05);
 }
 .price-block h3{
-  font-size:1.5rem; margin-bottom:16px; padding-bottom:12px;
+  font-size:1.3rem; margin-bottom:14px; padding-bottom:11px;
   border-bottom:1px solid var(--plum);
 }
 .price-block ul li{
@@ -520,7 +520,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   padding:clamp(30px,3.2vw,46px);
   align-self:start;
 }
-.price-cta h3{font-size:1.5rem; margin-bottom:12px; border:none; padding:0; color:var(--ivory)}
+.price-cta h3{font-size:1.3rem; margin-bottom:12px; border:none; padding:0; color:var(--ivory)}
 .price-cta p{font-size:.94rem; color:rgba(248,244,238,.72); margin-bottom:24px; max-width:40ch}
 .price-cta .btn-solid{
   background-color:var(--ivory); color:var(--plum);
@@ -531,7 +531,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    GIFT CARD
    ============================================================ */
-.gift{background:var(--lav-soft); padding:clamp(72px,10vw,140px) 0}
+.gift{background:var(--lav-soft); padding:clamp(56px,7.5vw,108px) 0}
 .gift-grid{
   display:grid; grid-template-columns:1.05fr .95fr;
   gap:clamp(36px,6vw,84px); align-items:center;
@@ -551,7 +551,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    INSTAGRAM
    ============================================================ */
-.instagram{padding:clamp(72px,10vw,140px) 0}
+.instagram{padding:clamp(56px,7.5vw,108px) 0}
 .ig-head{margin-bottom:clamp(30px,4vw,50px); position:relative}
 .ig-handle{
   display:inline-block; margin-top:20px;
@@ -578,13 +578,13 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
    ============================================================ */
 .contact{
   background:var(--char); color:var(--ivory);
-  padding:clamp(76px,10vw,150px) 0 clamp(96px,12vw,180px);
+  padding:clamp(60px,8vw,116px) 0 clamp(74px,9vw,136px);
   position:relative; overflow:hidden;
 }
 .contact::after{
   content:"Levendula"; position:absolute; left:0; right:0; bottom:-.16em;
   font-family:var(--serif); font-style:italic; font-weight:400;
-  font-size:clamp(5rem,17vw,15rem); line-height:1;
+  font-size:clamp(3.5rem,12vw,10.5rem); line-height:1;
   text-align:center; color:rgba(248,244,238,.05);
   pointer-events:none;
 }
@@ -593,7 +593,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   gap:clamp(40px,6vw,90px); align-items:start;
   position:relative; z-index:1;
 }
-.contact h2{font-size:clamp(2.6rem,5.4vw,4.4rem); margin-bottom:22px}
+.contact h2{font-size:clamp(2.05rem,4.1vw,3.3rem); margin-bottom:20px}
 .contact .body-lg{color:rgba(248,244,238,.75)}
 .contact-cta{display:flex; flex-wrap:wrap; gap:14px; margin-top:34px}
 .contact-details{border-top:1px solid var(--line-light)}
@@ -603,7 +603,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   align-items:baseline;
 }
 .cd-label{font-size:.7rem; letter-spacing:.26em; text-transform:uppercase; color:var(--lav)}
-.cd-value{font-family:var(--serif); font-size:1.35rem; font-weight:500; line-height:1.42}
+.cd-value{font-family:var(--serif); font-size:1.18rem; font-weight:500; line-height:1.45}
 .cd-value small{font-family:var(--sans); font-size:.8rem; font-weight:300; color:rgba(248,244,238,.6)}
 .cd-value a{border-bottom:1px solid rgba(201,188,216,.4); transition:border-color .3s, color .3s}
 .cd-value a:hover{color:var(--lav); border-color:var(--lav)}
@@ -614,7 +614,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   gap:18px; padding-top:34px; padding-bottom:8px;
 }
 .footer-brand{display:flex; flex-direction:column; gap:4px}
-.footer-brand .brand-name{color:var(--ivory); font-size:1.3rem}
+.footer-brand .brand-name{color:var(--ivory); font-size:1.15rem}
 .footer-brand .brand-sub{color:rgba(248,244,238,.55); letter-spacing:.2em}
 .footer-addr{font-size:.84rem; letter-spacing:.03em}
 .footer-links{display:flex; gap:22px; font-size:.84rem; letter-spacing:.05em}
@@ -641,7 +641,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 
   .header-cta{display:none}
   .ig-link{width:44px; height:44px}
-  .brand-name{font-size:1.3rem}
+  .brand-name{font-size:1.15rem}
 
   /* HERO: text → image → intro (image early, one primary CTA) */
   .hero-grid{
@@ -664,7 +664,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .trust-item:first-child{padding-left:16px}
   .trust-item:nth-child(2n){border-right:none}
   .trust-item:nth-child(-n+2){border-top:none}
-  .trust-item h3{font-size:1.12rem}
+  .trust-item h3{font-size:1.02rem}
 
   .lashes-grid,.uvled-inner,.about-grid,.gift-grid,.contact-grid{
     grid-template-columns:1fr;
@@ -708,7 +708,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 }
 
 @media (max-width:560px){
-  h1{font-size:clamp(2.4rem,9vw,3rem)}
+  h1{font-size:clamp(2rem,7.4vw,2.5rem)}
   .cert-strip{
     display:flex; overflow-x:auto; padding-bottom:14px;
     scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
