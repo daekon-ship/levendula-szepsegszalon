@@ -10,6 +10,9 @@ if (/[?&]static/.test(window.location.search)) document.documentElement.classLis
   var onScroll = function () {
     if (window.scrollY > 24) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    doc.style.setProperty('--p', max > 0 ? Math.min(window.scrollY / max, 1).toFixed(4) : 0);
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
