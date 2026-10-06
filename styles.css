@@ -59,7 +59,7 @@ body::after{
 /* ---------- shared ---------- */
 .hero-grid,.trust-strip,.lashes-grid,.uvled-inner,.section-head,.service-index,
 .about-grid,.cert-strip,.quals-note,.gallery,.price-grid,.gift-grid,.ig-head,
-.ig-grid,.contact-grid,.footer-inner,.footer-copy{
+.ig-grid,.contact-grid,.footer-inner,.footer-copy,.site-credit{
   width:100%;
   max-width:var(--max);
   margin-inline:auto;
@@ -625,6 +625,31 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   padding-bottom:34px; margin-top:10px;
 }
 
+/* DAEKON creator credit — discreet premium signature */
+.site-credit{
+  text-align:center; white-space:nowrap;
+  font-size:.8rem; letter-spacing:.14em;
+  color:rgba(248,244,238,.5);
+  padding-bottom:44px;
+}
+.site-credit a{
+  color:rgba(248,244,238,.86); font-weight:600; letter-spacing:.22em;
+  text-decoration:none; cursor:pointer; position:relative;
+  transition:color .25s var(--ease), text-shadow .25s var(--ease);
+}
+.site-credit a::after{
+  content:""; position:absolute; left:0; right:0; bottom:-4px; height:1px;
+  background:linear-gradient(90deg, var(--lav), rgba(201,188,216,.85));
+  transform:scaleX(0); transform-origin:right;
+  transition:transform .28s var(--ease);
+}
+.site-credit a:hover,.site-credit a:focus-visible{
+  color:#fff; text-shadow:0 0 14px rgba(201,188,216,.55);
+}
+.site-credit a:hover::after,.site-credit a:focus-visible::after{
+  transform:scaleX(1); transform-origin:left;
+}
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -705,6 +730,8 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .cd-row{grid-template-columns:104px 1fr; gap:14px}
 
   .footer-inner{flex-direction:column; align-items:flex-start; gap:14px}
+
+  .site-credit{font-size:.86rem; padding-top:6px; padding-bottom:54px}
 }
 
 @media (max-width:560px){
