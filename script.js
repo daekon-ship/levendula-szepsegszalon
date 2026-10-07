@@ -5,14 +5,22 @@ if (/[?&]static/.test(window.location.search)) document.documentElement.classLis
 (function () {
   'use strict';
 
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ---------- header state ---------- */
   var header = document.querySelector('.site-header');
+  var lastY = 0;
   var onScroll = function () {
-    if (window.scrollY > 24) header.classList.add('scrolled');
+    var y = window.scrollY;
+    if (y > 24) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
+    /* header slides away when scrolling down fast, returns on scroll up */
+    if (y > 320 && y > lastY + 6) header.classList.add('hides');
+    else if (y < lastY - 4 || y <= 320) header.classList.remove('hides');
+    lastY = y;
     var doc = document.documentElement;
     var max = doc.scrollHeight - window.innerHeight;
-    doc.style.setProperty('--p', max > 0 ? Math.min(window.scrollY / max, 1).toFixed(4) : 0);
+    doc.style.setProperty('--p', max > 0 ? Math.min(y / max, 1).toFixed(4) : 0);
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -37,7 +45,38 @@ if (/[?&]static/.test(window.location.search)) document.documentElement.classLis
     if (e.key === 'Escape') setMenu(false);
   });
 
-  /* ---------- scroll reveals ---------- */
+  /* ---------- hero entrance choreography ---------- */
+  /* elements get .pre (hidden state) in CSS only when .js is present;
+     after load we swap to .in with staggered timing for a cinematic entry */
+  var heroSeq = document.querySelectorAll('.hero-seq');
+  if (!reduceMotion && !document.documentElement.classList.contains('static')) {
+    document.body.classList.add('intro-pending');
+    heroSeq.forEach(function (el) { el.classList.add('pre'); });
+    /* wait for hero image decode so entrance never flashes a half-image */
+    var heroImg = document.querySelector('.hero-media img');
+    var start = function () {
+      requestAnimationFrame(function () {
+        document.body.classList.remove('intro-pending');
+        heroSeq.forEach(function (el) {
+          var d = parseFloat(el.getAttribute('data-seq') || '1');
+          setTimeout(function () {
+            el.classList.add('in');
+            el.classList.remove('pre');
+          }, d * 140);
+        });
+      });
+    };
+    if (heroImg && !heroImg.complete) {
+      heroImg.addEventListener('load', start, { once: true });
+      setTimeout(start, 1400); /* failsafe */
+    } else {
+      start();
+    }
+  } else {
+    heroSeq.forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- scroll reveals (staged masks + lifts) ---------- */
   var revealEls = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
@@ -53,6 +92,30 @@ if (/[?&]static/.test(window.location.search)) document.documentElement.classLis
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
+  /* ---------- subtle parallax on media (compositor-only transforms) ---------- */
+  if (!reduceMotion) {
+    var pxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
+    if (pxEls.length) {
+      var ticking = false;
+      var parallax = function () {
+        var vh = window.innerHeight;
+        pxEls.forEach(function (el) {
+          var r = el.getBoundingClientRect();
+          if (r.bottom < 0 || r.top > vh) return;
+          /* progress -0.5..0.5 across viewport */
+          var p = (r.top + r.height / 2 - vh / 2) / vh;
+          var speed = parseFloat(el.getAttribute('data-parallax')) || 0.08;
+          el.style.transform = 'translateY(' + (p * speed * 100).toFixed(2) + 'px) scale(1.08)';
+        });
+        ticking = false;
+      };
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(parallax); }
+      }, { passive: true });
+      parallax();
+    }
+  }
+
   /* ---------- services: floating preview image (desktop) ---------- */
   var floatEl = document.querySelector('.service-float');
   var floatImg = floatEl ? floatEl.querySelector('img') : null;
@@ -60,14 +123,26 @@ if (/[?&]static/.test(window.location.search)) document.documentElement.classLis
   var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   if (floatEl && index && canHover) {
+    var fx = 0, fy = 0, cx = 0, cy = 0, rafId = 0;
+    var loop = function () {
+      cx += (fx - cx) * 0.16;
+      cy += (fy - cy) * 0.16;
+      floatEl.style.left = cx.toFixed(1) + 'px';
+      floatEl.style.top = cy.toFixed(1) + 'px';
+      if (Math.abs(fx - cx) > 0.3 || Math.abs(fy - cy) > 0.3) {
+        rafId = requestAnimationFrame(loop);
+      } else {
+        rafId = 0; /* settle: no leaked render loop */
+      }
+    };
+    var ensureRaf = function () { if (!rafId) rafId = requestAnimationFrame(loop); };
     index.addEventListener('mousemove', function (e) {
-      floatEl.style.left = e.clientX + 'px';
-      floatEl.style.top = e.clientY + 'px';
+      fx = e.clientX; fy = e.clientY;
+      ensureRaf();
     });
     index.querySelectorAll('.service-row').forEach(function (row) {
       row.addEventListener('mouseenter', function (e) {
-        floatEl.style.left = e.clientX + 'px';
-        floatEl.style.top = e.clientY + 'px';
+        fx = e.clientX; fy = e.clientY;
         var src = row.getAttribute('data-img');
         if (src && floatImg.getAttribute('src') !== src) floatImg.setAttribute('src', src);
         floatEl.classList.add('on');
@@ -75,6 +150,9 @@ if (/[?&]static/.test(window.location.search)) document.documentElement.classLis
       row.addEventListener('mouseleave', function () {
         floatEl.classList.remove('on');
       });
+    });
+    window.addEventListener('blur', function () {
+      if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
     });
   }
 
