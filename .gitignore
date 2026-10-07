@@ -6,3 +6,10 @@
 /*.pdf
 .freebuff/
 Thumbs.db
+
+# development / audit tooling — not part of the client site
+_shots/
+_audit/
+_verify/
+_server*.log
+.claude/
