@@ -28,7 +28,7 @@
 
 /* ---------- base ---------- */
 *,*::before,*::after{box-sizing:border-box}
-html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header-h) + 8px); -webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth; scroll-padding-top:calc(var(--header-h) + 8px); -webkit-text-size-adjust:100%; overflow-x:clip}
 body{
   margin:0;
   background:var(--ivory);
@@ -218,7 +218,7 @@ h1 em,h2 em{font-style:italic; font-weight:400; color:var(--lav-deep)}
   max-width:var(--max); margin-inline:auto; padding-inline:var(--pad);
   height:100%; display:flex; align-items:center; justify-content:space-between; gap:24px;
 }
-.brand{display:flex; flex-direction:column; line-height:1}
+.brand{display:flex; flex-direction:column; justify-content:center; line-height:1; padding:6px 0}
 .brand-name{font-family:var(--serif); font-size:1.35rem; font-weight:500; letter-spacing:.02em}
 .brand-sub{font-size:.6rem; letter-spacing:.34em; text-transform:uppercase; color:var(--lav-deep); margin-top:5px}
 
@@ -228,6 +228,7 @@ h1 em,h2 em{font-style:italic; font-weight:400; color:var(--lav-deep)}
   padding-bottom:4px; position:relative;
   transition:color .3s;
 }
+.main-nav a::before{content:""; position:absolute; inset:-6px -6px -4px;}
 .main-nav a::after{
   content:""; position:absolute; left:0; bottom:0; height:1px; width:100%;
   background:var(--lav-deep); transform:scaleX(0); transform-origin:right;
@@ -238,7 +239,7 @@ h1 em,h2 em{font-style:italic; font-weight:400; color:var(--lav-deep)}
 
 .header-actions{display:flex; align-items:center; gap:16px}
 .ig-link{
-  display:grid; place-items:center; width:38px; height:38px;
+  display:grid; place-items:center; width:44px; height:44px;
   color:var(--plum); border:1px solid var(--line); border-radius:50%;
   transition:border-color .3s, color .3s, transform .3s;
 }
@@ -246,7 +247,7 @@ h1 em,h2 em{font-style:italic; font-weight:400; color:var(--lav-deep)}
 
 .menu-toggle{
   display:none; flex-direction:column; justify-content:center; gap:7px;
-  width:42px; height:42px; padding:0;
+  width:44px; height:44px; padding:0;
   background:none; border:none; cursor:pointer;
 }
 .menu-toggle span{display:block; width:26px; height:1.5px; background:var(--plum); transition:transform .4s var(--ease), opacity .3s}
@@ -274,7 +275,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 }
 .mobile-menu li a em{font-style:italic; color:var(--lav-deep)}
 .mobile-menu-foot{display:flex; flex-direction:column; gap:8px; margin-top:32px; font-size:.95rem; color:var(--plum-soft)}
-.mobile-menu-foot a{letter-spacing:.04em}
+.mobile-menu-foot a{letter-spacing:.04em; display:inline-block; padding:12px 0}
 
 /* ============================================================
    HERO — art-directed editorial entry
@@ -331,6 +332,8 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   margin-top:clamp(26px,4vh,40px);
   font-size:.68rem; letter-spacing:.32em; text-transform:uppercase;
   color:var(--plum-soft);
+  padding:10px 6px 10px 0;
+  margin-left:-6px;
 }
 .hero-scroll::after{
   content:""; width:1px; height:34px;
@@ -684,10 +687,10 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 .instagram{padding:clamp(30px,3.8vw,48px) 0; background:linear-gradient(180deg, var(--ivory) 0%, #F0EAF4 100%)}
 .ig-head{margin-bottom:clamp(30px,4vw,50px); position:relative}
 .ig-handle{
-  display:inline-block; margin-top:20px;
+  display:inline-block; margin-top:10px;
   font-size:1.02rem; letter-spacing:.06em; color:var(--lav-deep);
   border-bottom:1px solid var(--lav);
-  padding-bottom:3px;
+  padding:12px 2px;
   transition:color .3s, border-color .3s;
 }
 .ig-handle:hover{color:var(--plum); border-color:var(--plum)}
@@ -741,7 +744,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 .cd-label{font-size:.7rem; letter-spacing:.26em; text-transform:uppercase; color:var(--lav)}
 .cd-value{font-family:var(--serif); font-size:1.18rem; font-weight:500; line-height:1.45}
 .cd-value small{font-family:var(--sans); font-size:.8rem; font-weight:300; color:rgba(248,244,238,.6)}
-.cd-value a{border-bottom:1px solid rgba(201,188,216,.4); transition:border-color .3s, color .3s}
+.cd-value a{border-bottom:1px solid rgba(201,188,216,.4); transition:border-color .3s, color .3s; display:inline-block; padding:12px 0}
 .cd-value a:hover{color:var(--lav); border-color:var(--lav)}
 
 .site-footer{background:var(--char); color:rgba(248,244,238,.72); border-top:1px solid var(--line-light)}
@@ -753,8 +756,8 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 .footer-brand .brand-name{color:var(--ivory); font-size:1.15rem}
 .footer-brand .brand-sub{color:rgba(248,244,238,.55); letter-spacing:.2em}
 .footer-addr{font-size:.84rem; letter-spacing:.03em}
-.footer-links{display:flex; gap:22px; font-size:.84rem; letter-spacing:.05em}
-.footer-links a{position:relative; transition:color .3s}
+.footer-links{display:flex; flex-wrap:wrap; align-items:center; gap:0 22px; font-size:.84rem; letter-spacing:.05em}
+.footer-links a{position:relative; transition:color .3s; display:inline-block; padding:12px 6px; margin:0 -6px}
 .footer-links a::after{
   content:""; position:absolute; left:0; right:0; bottom:-4px; height:1px;
   background:currentColor; transform:scaleX(0); transform-origin:right;
@@ -778,6 +781,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   color:rgba(248,244,238,.55); font-weight:400; letter-spacing:.16em;
   text-decoration:none; cursor:pointer;
   transition:color .25s var(--ease);
+  display:inline-block; padding:13px 6px;
 }
 .site-credit a:hover,.site-credit a:focus-visible{
   color:rgba(248,244,238,.75);
@@ -931,7 +935,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .gallery{gap:7px}
   .gallery figcaption{padding:18px 8px 7px; font-size:.62rem}
   .price-tabs{margin-bottom:10px}
-  .ptab{padding:9px 15px; font-size:.8rem}
+  .ptab{padding:13px 15px; font-size:.8rem}
   .price-cta{padding:18px}
   .contact{padding:28px 0 40px}
   .contact h2{font-size:1.85rem}
@@ -1016,7 +1020,7 @@ body.menu-open .cta-bar{transform:translateY(110%)}
     font-family:var(--sans); font-size:.8rem; letter-spacing:.04em;
     color:var(--plum-soft); background:var(--paper);
     border:1px solid var(--line); border-radius:100px;
-    padding:9px 16px;
+    padding:13px 16px;
     transition:background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
   }
   .ptab.is-active{background:var(--plum); color:var(--ivory); border-color:var(--plum)}
