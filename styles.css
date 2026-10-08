@@ -312,7 +312,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   grid-template-areas:"text media" "intro media";
   align-items:start;
   column-gap:clamp(28px,5vw,72px);
-  min-height:calc(64svh - var(--header-h));
+  min-height:calc(58svh - var(--header-h));
 }
 .hero-text{grid-area:text; align-self:end; padding-top:clamp(22px,4.5vh,46px)}
 .hero-loc{
@@ -413,7 +413,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    FEATURED EYELASH
    ============================================================ */
-.lashes{background:var(--lav-soft); padding:clamp(40px,5vw,68px) 0; margin-top:clamp(36px,5vw,64px)}
+.lashes{background:var(--lav-soft); padding:clamp(34px,4.2vw,56px) 0; margin-top:clamp(36px,5vw,64px)}
 .lashes-grid{
   display:grid; grid-template-columns:1.05fr .95fr;
   gap:clamp(36px,6vw,80px); align-items:center;
@@ -446,7 +446,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    UV-LED
    ============================================================ */
-.uvled{background:var(--char); color:var(--ivory); padding:clamp(40px,5vw,68px) 0; position:relative; overflow:hidden}
+.uvled{background:var(--char); color:var(--ivory); padding:clamp(34px,4.2vw,56px) 0; position:relative; overflow:hidden}
 .uvled::before{
   content:""; position:absolute; top:-30%; right:-10%;
   width:52vw; height:52vw; max-width:680px; max-height:680px;
@@ -483,7 +483,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    SERVICES INDEX
    ============================================================ */
-.services{padding:clamp(40px,5vw,68px) 0; position:relative; background:linear-gradient(180deg, var(--ivory) 0%, var(--ivory) 55%, var(--ivory-2) 100%)}
+.services{padding:clamp(34px,4.2vw,56px) 0; position:relative; background:linear-gradient(180deg, var(--ivory) 0%, var(--ivory) 55%, var(--ivory-2) 100%)}
 .service-index{border-top:1px solid var(--line)}
 .service-row{
   display:grid;
@@ -525,7 +525,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    ABOUT
    ============================================================ */
-.about{background:var(--ivory-2); padding:clamp(40px,5vw,68px) 0}
+.about{background:var(--ivory-2); padding:clamp(34px,4.2vw,56px) 0}
 .about-grid{
   display:grid; grid-template-columns:.9fr 1.1fr;
   gap:clamp(36px,6vw,84px); align-items:center;
@@ -546,7 +546,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    QUALIFICATIONS
    ============================================================ */
-.quals{padding:clamp(40px,5vw,68px) 0; background:radial-gradient(95% 65% at 50% 105%, rgba(201,188,216,.26), rgba(201,188,216,0) 70%)}
+.quals{padding:clamp(34px,4.2vw,56px) 0; background:radial-gradient(95% 65% at 50% 105%, rgba(201,188,216,.26), rgba(201,188,216,0) 70%)}
 .cert-strip{
   display:grid; grid-template-columns:repeat(6,1fr);
   gap:clamp(12px,1.6vw,22px); align-items:start;
@@ -575,10 +575,10 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    WORK / GALLERY
    ============================================================ */
-.work{background:var(--ivory-2); padding:clamp(40px,5vw,68px) 0}
+.work{background:var(--ivory-2); padding:clamp(34px,4.2vw,56px) 0}
 .gallery{
   display:grid; grid-template-columns:repeat(4,1fr);
-  grid-auto-rows:clamp(150px,14.5vw,196px);
+  grid-auto-rows:clamp(140px,13vw,176px);
   gap:clamp(10px,1.4vw,18px);
 }
 .gallery figure{position:relative; overflow:hidden; background:var(--lav-soft); border:1px solid rgba(55,47,62,.12)}
@@ -602,7 +602,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    PRICE LIST
    ============================================================ */
-.prices{padding:clamp(40px,5vw,68px) 0; background:radial-gradient(110% 72% at 88% 0%, rgba(201,188,216,.3), rgba(201,188,216,0) 60%), var(--ivory)}
+.prices{padding:clamp(34px,4.2vw,56px) 0; background:radial-gradient(110% 72% at 88% 0%, rgba(201,188,216,.3), rgba(201,188,216,0) 60%), var(--ivory)}
 .price-grid{
   display:grid; grid-template-columns:1fr 1fr;
   gap:clamp(34px,4.5vw,64px) clamp(40px,6vw,96px);
@@ -680,7 +680,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    GIFT CARD
    ============================================================ */
-.gift{background:var(--lav-soft); padding:clamp(40px,5vw,68px) 0}
+.gift{background:var(--lav-soft); padding:clamp(34px,4.2vw,56px) 0}
 .gift-grid{
   display:grid; grid-template-columns:1.05fr .95fr;
   gap:clamp(36px,6vw,84px); align-items:center;
@@ -700,7 +700,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* ============================================================
    INSTAGRAM
    ============================================================ */
-.instagram{padding:clamp(40px,5vw,68px) 0; background:linear-gradient(180deg, var(--ivory) 0%, #F0EAF4 100%)}
+.instagram{padding:clamp(34px,4.2vw,56px) 0; background:linear-gradient(180deg, var(--ivory) 0%, #F0EAF4 100%)}
 .ig-head{margin-bottom:clamp(30px,4vw,50px); position:relative}
 .ig-handle{
   display:inline-block; margin-top:20px;
@@ -733,7 +733,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
    ============================================================ */
 .contact{
   background:var(--char); color:var(--ivory);
-  padding:clamp(44px,5.5vw,76px) 0 clamp(52px,6.5vw,92px);
+  padding:clamp(38px,4.6vw,60px) 0 clamp(44px,5.4vw,72px);
   position:relative; overflow:hidden;
 }
 .contact::before{
@@ -845,7 +845,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   }
   .hero-text{padding-top:clamp(26px,5vh,44px); align-self:auto}
   .hero-media{margin-right:calc(-1 * var(--pad)); margin-left:calc(-1 * var(--pad))}
-  .hero-media picture{flex:none; min-height:0; height:min(54vw,400px)}
+  .hero-media picture{flex:none; min-height:0; height:min(49vw,340px)}
   .hero-media figcaption{padding:12px var(--pad) 0; text-align:left; font-size:.66rem}
   .hero-intro{padding-top:26px; padding-bottom:8px}
   .hero-lead{margin-top:0; max-width:none}
@@ -862,7 +862,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .lashes-grid,.uvled-inner,.about-grid,.gift-grid,.contact-grid{
     grid-template-columns:1fr;
   }
-  .lashes-media{padding-bottom:70px; max-width:560px}
+  .lashes-media{padding-bottom:56px; max-width:560px}
   .lm-sub{width:46%}
   .uvled-media{order:2}
   .about-media{max-width:480px}
@@ -948,7 +948,17 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .site-credit{font-size:.72rem; letter-spacing:.1em}
   /* hero location line: single compact row on phones */
   .hero-loc{font-size:.58rem; letter-spacing:.16em; gap:8px; white-space:nowrap}
-  .hero-media picture{height:min(54vw,340px)}
+  .hero-media picture{height:min(46vw,300px)}
+  /* mobil képmagasságok: rövidebb média, ugyanaz a tartalom */
+  .lm-main img{aspect-ratio:1/1.02}
+  .lm-sub img{aspect-ratio:1/1}
+  .about-media img{aspect-ratio:1/.92}
+  .gift-media img{aspect-ratio:1/1.05}
+  .uvled-media img{aspect-ratio:4/2.9}
+  .lashes-media{padding-bottom:64px}
+  .hero,.lashes,.uvled,.services,.about,.quals,.work,.prices,.gift,.instagram{scroll-margin-top:var(--header-h)}
+  .section-head{margin-bottom:18px}
+  .eyebrow{margin-bottom:10px}
   .trust-strip{margin-top:18px}
   .trust-item{padding:14px 12px 16px}
   .trust-item:first-child{padding-left:12px}
