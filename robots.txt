@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://daekon-ship.github.io/levendula-szepsegszalon/sitemap.xml
