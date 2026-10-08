@@ -898,13 +898,13 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .price-grid > .price-block[data-block="5"]{grid-area:b1}
   .price-grid > .price-cta{grid-area:cta}
   .price-block{padding:14px 14px 16px}
-  .price-block h3{font-size:.94rem; margin-bottom:5px; padding-bottom:5px}
-  .price-block ul li{padding:5px 0; font-size:.76rem}
-  .price-block li.sub{padding:1px 0 2px}
-  .price-block li.sub>span, .price-block li.sub .price{font-size:.72rem}
-  .price-block li.note{padding:0 0 4px}
-  .price-block li.note>span{font-size:.68rem}
-  .price-block .price{font-size:.72rem}
+  .price-block h3{font-size:1rem; margin-bottom:7px; padding-bottom:7px}
+  .price-block ul li{padding:6px 0; font-size:.84rem}
+  .price-block li.sub{padding:2px 0 3px}
+  .price-block li.sub>span, .price-block li.sub .price{font-size:.78rem}
+  .price-block li.note{padding:1px 0 5px}
+  .price-block li.note>span{font-size:.74rem}
+  .price-block .price{font-size:.8rem}
   .price-cta{padding:22px}
 
   .ig-grid{grid-template-columns:repeat(3,1fr)}
@@ -921,8 +921,8 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 }
 
 @media (max-width:560px){
-  h1{font-size:clamp(1.85rem,6.9vw,2.2rem)}
-  h2{font-size:clamp(1.45rem,5.7vw,1.85rem)}
+  h1{font-size:clamp(2rem,7.4vw,2.5rem)}
+  h2{font-size:clamp(1.62rem,6.6vw,2.1rem)}
 
   /* compact phone typography */
   body{font-size:15.5px}
@@ -931,21 +931,21 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .eyebrow b{font-size:.58rem; padding:3px 7px 2px; margin-right:4px}
   .section-lead{font-size:.92rem !important; line-height:1.55; margin-top:12px}
   .body-lg{font-size:.94rem !important; line-height:1.62}
-  .hero-lead{font-size:.9rem !important; line-height:1.5}
+  .hero-lead{font-size:.96rem !important; line-height:1.6}
   .fqe .fine,.fine{font-size:.74rem}
   .srv-name{font-size:1.16rem !important}
   .srv-desc{font-size:.78rem; line-height:1.55}
   .srv-num{font-size:.94rem}
-  .tick-list li{font-size:.82rem; padding:8px 0}
+  .tick-list li{font-size:.88rem; padding:10px 0}
   .trust-item h3{font-size:.98rem}
   .trust-item p{font-size:.8rem; line-height:1.5}
   .trust-item{padding:16px 14px 20px}
   .trust-item:first-child{padding-left:14px}
   .cd-value{font-size:1rem; line-height:1.4}
-  .cd-row{display:flex; flex-direction:column; gap:2px; padding:10px 0}
-  .cd-label{font-size:.6rem; letter-spacing:.22em}
-  .footer-copy{font-size:.68rem; letter-spacing:.06em}
-  .site-credit{font-size:.72rem; letter-spacing:.1em}
+  .cd-row{display:flex; flex-direction:column; gap:3px; padding:12px 0}
+  .cd-label{font-size:.64rem; letter-spacing:.22em}
+  .footer-copy{font-size:.72rem; letter-spacing:.06em}
+  .site-credit{font-size:.78rem; letter-spacing:.1em}
   /* hero location line: single compact row on phones */
   .hero-loc{font-size:.58rem; letter-spacing:.16em; gap:8px; white-space:nowrap}
   .hero-media picture{height:min(40vw,250px)}
@@ -963,14 +963,14 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .hero-cta{margin-top:12px; gap:8px}
   .marquee{padding:12px 0; margin-top:16px}
   .service-row{padding:11px 0; row-gap:4px}
-  .srv-desc{font-size:.74rem; line-height:1.45}
+  .srv-desc{font-size:.78rem; line-height:1.5}
   .gallery{gap:7px}
-  .gallery figcaption{padding:16px 8px 6px; font-size:.54rem}
+  .gallery figcaption{padding:18px 8px 7px; font-size:.62rem}
   .price-tabs{margin-bottom:10px}
-  .ptab{padding:7px 13px; font-size:.74rem}
+  .ptab{padding:9px 15px; font-size:.8rem}
   .price-cta{padding:18px}
   .contact{padding:28px 0 40px}
-  .contact h2{font-size:1.65rem}
+  .contact h2{font-size:1.85rem}
   .contact-cta{margin-top:20px; gap:10px}
   .footer-inner{padding-top:22px}
   .footer-copy{padding-bottom:20px}
@@ -988,6 +988,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .trust-item:first-child{padding-left:12px}
   .hero-loc::before{width:26px}
   .mobile-menu-foot{font-size:.84rem}
+  .btn{padding:13px 24px; font-size:.8rem}
   .btn-sm{padding:9px 18px; font-size:.72rem}
   /* galéria: 3 keskeny oszlop, rövidebb sorok mobilon (mind a 13 kép marad) */
   .gallery{gap:7px; grid-auto-rows:30vw}
