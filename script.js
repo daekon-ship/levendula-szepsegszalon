@@ -156,6 +156,39 @@ if (/[?&]static/.test(window.location.search)) document.documentElement.classLis
     });
   }
 
+  /* ---------- mobil árlista fülek ---------- */
+  var priceGrid = document.querySelector('.price-grid');
+  var priceTabs = document.querySelector('.price-tabs');
+  if (priceGrid && priceTabs) {
+    var pBlocks = priceGrid.querySelectorAll('[data-block]');
+    var pTabs = priceTabs.querySelectorAll('.ptab');
+    var setPriceTab = function (id) {
+      pBlocks.forEach(function (b) { b.classList.toggle('is-active', b.getAttribute('data-block') === id); });
+      pTabs.forEach(function (t) {
+        var on = t.getAttribute('data-tab') === id;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+    };
+    pTabs.forEach(function (t) {
+      t.addEventListener('click', function () { setPriceTab(t.getAttribute('data-tab')); });
+    });
+    setPriceTab('1');
+    priceGrid.classList.add('tab-mode');
+  }
+
+  /* ---------- fix mobil gyors-CTA sáv ---------- */
+  var ctaBar = document.querySelector('.cta-bar');
+  if (ctaBar) {
+    var heroEl = document.querySelector('.hero');
+    var showAfter = heroEl ? Math.round(heroEl.offsetHeight * 0.55) : 400;
+    var ctaOnScroll = function () {
+      ctaBar.classList.toggle('show', window.scrollY > showAfter);
+    };
+    window.addEventListener('scroll', ctaOnScroll, { passive: true });
+    ctaOnScroll();
+  }
+
   /* ---------- active nav highlight ---------- */
   var navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
   var sections = [];

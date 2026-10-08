@@ -51,6 +51,8 @@ Egyoldalas, prémium megjelenésű bemutatkozó oldal a szalon számára. Egyetl
 - **Instagram link**: minden „Instagram" kattintás a @levendula_szepsegszalon profilra visz
 - **Google-barát**: be van építve a „BeautySalon" strukturált adat (név, cím, telefon, Instagram) — segít a helyi Google-találatban
 - **Mobilra optimalizált**: 360–1440 px között tesztelve, nincs vízszintes csúszás
+- **Mobil árlista fülökkel**: mobilon az árak kategóriánként kattintható fülökre bontva jelennek meg (Műszempilla / Pedikűr / Arc & test / Masszázs / Gyantázás) — asztali gépen továbbra is minden kategória egyszerre látszik
+- **Gyors-CTA sáv mobilon**: ha lejjebb görgetsz a telefodon, alul megjelenik egy „Hívás / Időpontot kérek” sáv — bármikor egy koppintás az elérhetőség
 - **Gyors**: nincsenek külső betöltött alkalmazások, minden kép és betű az oldal része
 
 ---

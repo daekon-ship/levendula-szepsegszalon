@@ -993,6 +993,50 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .contact-cta .btn,.hero-cta .btn{flex:1 1 auto; text-align:center}
 }
 
+/* mobil árlista fülek (JS engedélyezi a tab-módot) */
+.price-tabs{display:none}
+
+/* fix mobil gyors-CTA sáv */
+.cta-bar{
+  position:fixed; left:0; right:0; bottom:0; z-index:52;
+  display:none; gap:10px; align-items:stretch;
+  padding:10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  background:rgba(42,36,49,.96);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  border-top:1px solid rgba(201,188,216,.28);
+  transform:translateY(110%);
+  transition:transform .45s var(--ease);
+}
+.cta-bar.show{transform:translateY(0)}
+body.menu-open .cta-bar{transform:translateY(110%)}
+.cta-bar-btn{flex:1; margin:0; text-align:center; padding:12px 16px}
+.cta-bar .btn-solid{background-color:var(--lav)}
+
+@media (max-width:900px){
+  .price-tabs{
+    display:flex; gap:8px; overflow-x:auto;
+    margin-bottom:14px; padding-bottom:2px;
+    -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  }
+  .price-tabs::-webkit-scrollbar{display:none}
+  .ptab{
+    flex:none; cursor:pointer;
+    font-family:var(--sans); font-size:.8rem; letter-spacing:.04em;
+    color:var(--plum-soft); background:var(--paper);
+    border:1px solid var(--line); border-radius:100px;
+    padding:9px 16px;
+    transition:background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+  }
+  .ptab.is-active{background:var(--plum); color:var(--ivory); border-color:var(--plum)}
+  .price-grid.tab-mode{display:block}
+  .price-grid.tab-mode .price-block,
+  .price-grid.tab-mode .price-cta{display:none; margin-top:0}
+  .price-grid.tab-mode .price-block.is-active,
+  .price-grid.tab-mode .price-cta.is-active{display:block}
+  .cta-bar{display:flex}
+  body{padding-bottom:58px}
+}
+
 /* ---------- static capture mode (screenshots) ---------- */
 .static .reveal{opacity:1 !important; transform:none !important; transition:none !important; clip-path:none !important}
 .static .hero-seq{opacity:1 !important; transform:none !important; clip-path:none !important}
