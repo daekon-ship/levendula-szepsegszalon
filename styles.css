@@ -948,6 +948,11 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .uvled .body-lg{margin-bottom:20px}
   .trust-item{padding:11px 12px 13px}
   .quals-note{margin-top:16px; padding-top:14px}
+  /* mobil zajtalanítás: felesleges dekorációk elrejtése */
+  .hero-scroll{display:none}
+  .hero-media figcaption{display:none}
+  .gallery figcaption{display:none}
+  .site-credit{display:none}
   .trust-item:first-child{padding-left:12px}
   .hero-loc::before{width:26px}
   .mobile-menu-foot{font-size:.84rem}
@@ -957,7 +962,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .gallery{gap:7px; grid-auto-rows:30vw}
   .gallery figcaption{font-size:.54rem}
   .cert{flex:0 0 42%}
-  .cert figcaption{font-size:.6rem}
+  .cert figcaption{font-size:.68rem}
   .quals-note{font-size:.82rem}
   .price-block h3{font-size:1.12rem}
   .price-block ul li{font-size:.86rem; padding:9px 0}
