@@ -743,13 +743,6 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   pointer-events:none;
   animation:blobDrift 19s ease-in-out infinite alternate-reverse;
 }
-.contact::after{
-  content:"Levendula"; position:absolute; left:0; right:0; bottom:-.16em;
-  font-family:var(--serif); font-style:italic; font-weight:400;
-  font-size:clamp(3.5rem,12vw,10.5rem); line-height:1;
-  text-align:center; color:rgba(248,244,238,.05);
-  pointer-events:none;
-}
 .contact-grid{
   display:grid; grid-template-columns:1fr 1fr;
   gap:clamp(40px,6vw,90px); align-items:start;
@@ -796,26 +789,17 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 /* DAEKON creator credit — discreet premium signature */
 .site-credit{
   text-align:center; white-space:nowrap;
-  font-size:.8rem; letter-spacing:.14em;
-  color:rgba(248,244,238,.5);
+  font-size:.72rem; letter-spacing:.12em;
+  color:rgba(248,244,238,.32);
   padding-bottom:44px;
 }
 .site-credit a{
-  color:rgba(248,244,238,.86); font-weight:600; letter-spacing:.22em;
-  text-decoration:none; cursor:pointer; position:relative;
-  transition:color .25s var(--ease), text-shadow .25s var(--ease);
-}
-.site-credit a::after{
-  content:""; position:absolute; left:0; right:0; bottom:-4px; height:1px;
-  background:linear-gradient(90deg, var(--lav), rgba(201,188,216,.85));
-  transform:scaleX(0); transform-origin:right;
-  transition:transform .28s var(--ease);
+  color:rgba(248,244,238,.55); font-weight:400; letter-spacing:.16em;
+  text-decoration:none; cursor:pointer;
+  transition:color .25s var(--ease);
 }
 .site-credit a:hover,.site-credit a:focus-visible{
-  color:#fff; text-shadow:0 0 14px rgba(201,188,216,.55);
-}
-.site-credit a:hover::after,.site-credit a:focus-visible::after{
-  transform:scaleX(1); transform-origin:left;
+  color:rgba(248,244,238,.75);
 }
 
 /* ============================================================
@@ -945,7 +929,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .cd-row{display:flex; flex-direction:column; gap:3px; padding:12px 0}
   .cd-label{font-size:.64rem; letter-spacing:.22em}
   .footer-copy{font-size:.72rem; letter-spacing:.06em}
-  .site-credit{font-size:.78rem; letter-spacing:.1em}
+  .site-credit{font-size:.68rem; letter-spacing:.1em}
   /* hero location line: single compact row on phones */
   .hero-loc{font-size:.58rem; letter-spacing:.16em; gap:8px; white-space:nowrap}
   .hero-media picture{height:min(40vw,250px)}
