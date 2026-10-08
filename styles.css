@@ -560,7 +560,7 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 .cert:nth-child(odd){transform:rotate(-.7deg)}
 .cert:nth-child(even){transform:rotate(.6deg)}
 .cert:hover{transform:translateY(-8px) rotate(0); box-shadow:0 24px 50px rgba(42,36,49,.2)}
-.cert img{width:100%; aspect-ratio:3/4; object-fit:contain; object-position:top; background:#fff}
+.cert img{width:100%; height:auto; display:block; background:#fff}
 .cert figcaption{
   font-size:.66rem; letter-spacing:.14em; text-transform:uppercase;
   color:var(--plum-soft); text-align:center; padding:10px 4px 12px;
