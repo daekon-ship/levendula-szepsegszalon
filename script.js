@@ -178,15 +178,43 @@ if (/[?&]static/.test(window.location.search)) document.documentElement.classLis
   }
 
   /* ---------- fix mobil gyors-CTA sáv ---------- */
+  /* Megjelenik a hero után; ELREJTŐZIK, amíg a kapcsolat szekció vagy a lábléc látható,
+     és menü nyitva mellett is rejtett. Így semmilyen tartalmat nem takar. */
   var ctaBar = document.querySelector('.cta-bar');
   if (ctaBar) {
     var heroEl = document.querySelector('.hero');
     var showAfter = heroEl ? Math.round(heroEl.offsetHeight * 0.55) : 400;
+    var footerEl = document.querySelector('.site-footer');
+    var contactEl = document.querySelector('.contact');
+    var pastHero = false;
+    var overFooter = false;
+    var ctaUpdate = function () {
+      ctaBar.classList.toggle('show', pastHero && !overFooter);
+    };
+    /* pozíció-alapú ellenőrzés minden frame-ben (nem csak IO-ra hagyatkozunk) */
     var ctaOnScroll = function () {
-      ctaBar.classList.toggle('show', window.scrollY > showAfter);
+      pastHero = window.scrollY > showAfter;
+      if (footerEl || contactEl) {
+        var vh = window.innerHeight;
+        var hidden = false;
+        [footerEl, contactEl].forEach(function (el) {
+          if (!el) return;
+          var r = el.getBoundingClientRect();
+          if (r.top < vh && r.bottom > 0) hidden = true;
+        });
+        overFooter = hidden;
+      }
+      ctaUpdate();
     };
     window.addEventListener('scroll', ctaOnScroll, { passive: true });
+    window.addEventListener('resize', ctaOnScroll, { passive: true });
     ctaOnScroll();
+    /* IO csak tartalék, ha a getBoundingClientRect-mérés nem elég pontos (pl. programozott scroll) */
+    if ('IntersectionObserver' in window && (footerEl || contactEl)) {
+      var ctaIo = new IntersectionObserver(function () { ctaOnScroll(); }, { threshold: 0.05 });
+      if (footerEl) ctaIo.observe(footerEl);
+      if (contactEl) ctaIo.observe(contactEl);
+    }
   }
 
   /* ---------- active nav highlight ---------- */

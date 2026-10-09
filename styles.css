@@ -794,7 +794,22 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .main-nav{display:none}
   .menu-toggle{display:flex}
   .hero-side{display:none}
+  .cert-strip{grid-template-columns:repeat(2,1fr); gap:18px}
+}
+
+@media (min-width:1081px){
   .cert-strip{grid-template-columns:repeat(3,1fr); gap:18px}
+}
+
+@media (min-width:561px) and (max-width:900px){
+  .cert-strip{grid-template-columns:repeat(2,1fr); gap:18px}
+}
+
+/* telefonsáv: egy oszlop, elegánsan középre */
+@media (max-width:560px){
+  .cert-strip{grid-template-columns:1fr; max-width:340px; padding-inline:20px; margin-inline:auto}
+  .cert{transform:none}
+  .cert img{object-fit:contain; background:#fff}
 }
 
 @media (max-width:900px){
@@ -890,6 +905,29 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 }
 
 @media (max-width:560px){
+  /* KONTAKT TIPOGRÁFIA: prémium, olvasható, erős */
+  .contact{padding:34px 0 44px}
+  .contact h2{font-size:2rem; letter-spacing:-.01em; margin-bottom:14px}
+  .contact .body-lg{font-size:.96rem !important; line-height:1.68; color:rgba(248,244,238,.82)}
+  .contact .eyebrow{color:var(--lav); margin-bottom:10px}
+  .contact-cta{margin-top:26px; gap:12px; padding-top:6px}
+  .contact-cta .btn{padding:15px 22px; font-size:.82rem; font-weight:400}
+  .contact-details{margin-top:34px}
+  .cd-row{padding:14px 0}
+  .cd-label{font-size:.62rem; letter-spacing:.24em; color:var(--lav); opacity:.9}
+  .cd-value{font-size:1.12rem; font-weight:500; line-height:1.5; color:var(--ivory)}
+  .cd-value small{font-size:.78rem; color:rgba(248,244,238,.62); letter-spacing:.02em}
+  .cd-value a{font-weight:500; color:var(--ivory); border-bottom:1px solid rgba(201,188,216,.45); padding:12px 0 10px}
+  .cd-value a:hover{color:var(--lav)}
+  /* FOOTER TIPOGRÁFIA: rendezett, harmonikus */
+  .site-footer{line-height:1.6}
+  .footer-brand .brand-name{font-size:1.3rem; letter-spacing:.03em}
+  .footer-brand .brand-sub{font-size:.62rem; letter-spacing:.26em; color:rgba(248,244,238,.6)}
+  .footer-addr{font-size:.86rem; line-height:1.65; color:rgba(248,244,238,.78); letter-spacing:.02em}
+  .footer-links{font-size:.84rem; letter-spacing:.04em; gap:4px 20px; margin-top:6px}
+  .footer-links a{color:rgba(248,244,238,.85); padding:12px 4px; margin:0 -4px}
+  .footer-copy{font-size:.74rem; letter-spacing:.06em; color:rgba(248,244,238,.5); padding-top:18px}
+
   h1{font-size:clamp(2rem,7.4vw,2.5rem)}
   h2{font-size:clamp(1.62rem,6.6vw,2.1rem)}
 
@@ -937,10 +975,10 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .price-tabs{margin-bottom:10px}
   .ptab{padding:13px 15px; font-size:.8rem}
   .price-cta{padding:18px}
-  .contact{padding:28px 0 40px}
-  .contact h2{font-size:1.85rem}
-  .contact-cta{margin-top:20px; gap:10px}
-  .footer-inner{padding-top:22px}
+  .contact{padding:34px 0 44px}
+  .contact h2{font-size:2rem}
+  .contact-cta{margin-top:26px; gap:12px}
+  .footer-inner{padding-top:26px}
   .footer-copy{padding-bottom:20px}
   .site-credit{padding-bottom:32px}
   .section-head{margin-bottom:14px}
@@ -958,6 +996,9 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .hero-media figcaption{display:none}
   .gallery figcaption{display:none}
   .site-credit{display:none}
+  /* ajándékutalvány kártya: mobilon forgatás nélkül, hogy ne szorítsa össze a szöveget */
+  .gift-media{transform:none}
+  .gift-media:hover{transform:translateY(-4px)}
   .trust-item:first-child{padding-left:12px}
   .hero-loc::before{width:26px}
   .mobile-menu-foot{font-size:.84rem}
@@ -966,8 +1007,6 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   /* galéria: 3 keskeny oszlop, rövidebb sorok mobilon (mind a 13 kép marad) */
   .gallery{gap:7px; grid-auto-rows:30vw}
   .gallery figcaption{font-size:.54rem}
-  .cert{flex:0 0 42%}
-  .cert figcaption{font-size:.68rem}
   .quals-note{font-size:.82rem}
   .price-block h3{font-size:1.12rem}
   .price-block ul li{font-size:.86rem; padding:9px 0}
@@ -979,14 +1018,11 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
   .uvled .body-lg{font-size:.92rem !important}
   .footer-links{font-size:.78rem; gap:16px}
 
-  .cert-strip{
-    display:flex; overflow-x:auto; padding-bottom:14px;
-    scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-  }
   .about-points{grid-template-columns:1fr}
   .about-points > div:nth-child(even){padding-left:0; border-left:none}
   .contact-cta .btn,.hero-cta .btn{flex:1 1 auto; text-align:center}
 }
+
 
 /* mobil árlista fülek (JS engedélyezi a tab-módot) */
 .price-tabs{display:none}
