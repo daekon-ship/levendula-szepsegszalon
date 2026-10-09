@@ -7,16 +7,21 @@
 
 ## 1. Mi az oldal, röviden
 
-Egyoldalas bemutatkozó oldal a szalon saját színeivel (a kezelőszoba lila fala és a géllakk pinkje). Felülről lefelé:
+Egyoldalas, prémium megjelenésű bemutatkozó oldal a szalon számára. Egyetlen hosszú oldal, amelyet felülről lefelé lehet görgetni:
 
-1. **Nyitó** — a szalon neve, Bogi bemutatkozó mondata, valódi szempillafotó, három kiemelt ár
-2. **Kezelések és árak** — a teljes 2026. 10. 01-i árlista kategóriánként; a vendég bejelöli, amit szeretne, az oldal összeadja az árat, és egy gombnyomással kész e-mailt nyit Boginak (kezelések, összeg, mikor jó neki, neve)
-3. **Munkáim** — galéria szűrővel (pilla, pedikűr, arc és masszázs, szalon), kattintásra nagyítás
-4. **Rólam** — Bogi bemutatása, 6 oklevél nagyítható képpel
-5. **Ajándékutalvány** — a valódi utalványok fotója, érdeklődés gomb
-6. **Kapcsolat** — cím, telefon, e-mail, Instagram, útvonal; kipróbálható „kapucsengő”, amin a 44-es gomb Bogi csengője
+1. **Nyitó (hero)** — nagy cím, fotó, „Munkáim megtekintése" gomb
+2. **Műszempilla** — szolgáltatáslista + „Időpont egyeztetés üzenetben" gomb
+3. **UV-LED újdonság** — sötét kiemelt blokk az érdeklődéshez
+4. **Szolgáltatások** — 5 soros lista (műszempilla, pedikűr, arc- és testkezelés, masszázs, gyantázás)
+5. **Rólam** — Bense Boglárka bemutatása fotóval
+6. **Szakmaiság** — 6 oklevél
+7. **Munkáim** — galéria valódi vendégfotókkal
+8. **Árlista** — a 2026. 10. 01-i árlista teljes tartalma
+9. **Ajándékutalvány** — gombos érdeklődés
+10. **Instagram** — 6 fotó, a profilra kattintanak át
+11. **Kapcsolat** — cím, telefonszám, Instagram, e-mail gombok
 
-**Nincs időpontfoglaló rendszer** — minden gomb e-mailt nyit (vagy hívást indít), ahogy kérték.
+**Nincs időpontfoglaló rendszer** — minden gomb e-mailt nyit (vagy felhívást), ahogy kérték.
 
 ---
 
@@ -46,8 +51,8 @@ Egyoldalas bemutatkozó oldal a szalon saját színeivel (a kezelőszoba lila fa
 - **Instagram link**: minden „Instagram" kattintás a @levendula_szepsegszalon profilra visz
 - **Google-barát**: be van építve a „BeautySalon" strukturált adat (név, cím, telefon, Instagram) — segít a helyi Google-találatban
 - **Mobilra optimalizált**: 360–1440 px között tesztelve, nincs vízszintes csúszás
-- **Árlista kategóriákkal**: Műszempilla / Pedikűr / Arckezelések / Masszázs / Gyantázás — a kategória melletti szám mutatja, hány kezelést jelölt be a vendég
-- **Gyors sáv mobilon**: görgetés közben alul „Hívás / Időpontot kérek” sáv; ha a vendég már jelölt kezelést, a sáv mutatja a darabszámot és az összeget, és onnan küldhető az üzenet
+- **Mobil árlista fülökkel**: mobilon az árak kategóriánként kattintható fülökre bontva jelennek meg (Műszempilla / Pedikűr / Arc & test / Masszázs / Gyantázás) — asztali gépen továbbra is minden kategória egyszerre látszik
+- **Gyors-CTA sáv mobilon**: ha lejjebb görgetsz a telefodon, alul megjelenik egy „Hívás / Időpontot kérek” sáv — bármikor egy koppintás az elérhetőség
 - **Gyors**: nincsenek külső betöltött alkalmazások, minden kép és betű az oldal része
 
 ---
@@ -68,4 +73,4 @@ Egyoldalas bemutatkozó oldal a szalon saját színeivel (a kezelőszoba lila fa
 
 ---
 
-*Utolsó frissítés: 2026. október 9. · DAEKON készítette.*
+*Utolsó frissítés: 2026. október 8. · DAEKON készítette.*
