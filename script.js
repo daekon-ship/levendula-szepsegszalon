@@ -1,249 +1,262 @@
-/* Levendula Szépségszalon – interactions (no dependencies) */
-document.documentElement.classList.add('js');
-if (/[?&]static/.test(window.location.search)) document.documentElement.classList.add('static');
-
+/* Levendula Szépségszalon – interakciók */
 (function () {
   'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var mqMobile = window.matchMedia('(max-width:1000px)');
+  var ft = function (n) { return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0') + '\u00a0Ft'; };
 
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ---------- hero load sequence ---------- */
+  var hero = $('.hero');
+  if (hero) {
+    var img = $('.hero-photo img');
+    var go = function () { requestAnimationFrame(function () { hero.classList.add('is-loaded'); }); };
+    if (img && !img.complete) { img.addEventListener('load', go); img.addEventListener('error', go); setTimeout(go, 1200); } else { go(); }
+  }
 
-  /* ---------- header state ---------- */
-  var header = document.querySelector('.site-header');
-  var lastY = 0;
+  /* ---------- header ---------- */
+  var header = $('.site-header');
+  var mbar = $('.m-bar');
   var onScroll = function () {
     var y = window.scrollY;
-    if (y > 24) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-    /* header slides away when scrolling down fast, returns on scroll up */
-    if (y > 320 && y > lastY + 6) header.classList.add('hides');
-    else if (y < lastY - 4 || y <= 320) header.classList.remove('hides');
-    lastY = y;
-    var doc = document.documentElement;
-    var max = doc.scrollHeight - window.innerHeight;
-    doc.style.setProperty('--p', max > 0 ? Math.min(y / max, 1).toFixed(4) : 0);
+    if (header) header.classList.toggle('is-scrolled', y > 24);
+    if (mbar) {
+      var on = y > (hero ? hero.offsetHeight * 0.6 : 300);
+      mbar.classList.toggle('is-on', on);
+      mbar.setAttribute('aria-hidden', on ? 'false' : 'true');
+      $$('a,button', mbar).forEach(function (el) { el.tabIndex = on ? 0 : -1; });
+    }
   };
-  onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-  /* ---------- mobile menu ---------- */
-  var toggle = document.querySelector('.menu-toggle');
-  var menu = document.querySelector('.mobile-menu');
-  if (menu) menu.removeAttribute('hidden');
-
-  var setMenu = function (open) {
-    document.body.classList.toggle('menu-open', open);
-    document.body.style.overflow = open ? 'hidden' : '';
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  };
-  toggle.addEventListener('click', function () {
-    setMenu(!document.body.classList.contains('menu-open'));
-  });
-  menu.addEventListener('click', function (e) {
-    if (e.target.closest('a')) setMenu(false);
-  });
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') setMenu(false);
-  });
-
-  /* ---------- hero entrance choreography ---------- */
-  /* elements get .pre (hidden state) in CSS only when .js is present;
-     after load we swap to .in with staggered timing for a cinematic entry */
-  var heroSeq = document.querySelectorAll('.hero-seq');
-  if (!reduceMotion && !document.documentElement.classList.contains('static')) {
-    document.body.classList.add('intro-pending');
-    heroSeq.forEach(function (el) { el.classList.add('pre'); });
-    /* wait for hero image decode so entrance never flashes a half-image */
-    var heroImg = document.querySelector('.hero-media img');
-    var start = function () {
-      requestAnimationFrame(function () {
-        document.body.classList.remove('intro-pending');
-        heroSeq.forEach(function (el) {
-          var d = parseFloat(el.getAttribute('data-seq') || '1');
-          setTimeout(function () {
-            el.classList.add('in');
-            el.classList.remove('pre');
-          }, d * 140);
-        });
-      });
-    };
-    if (heroImg && !heroImg.complete) {
-      heroImg.addEventListener('load', start, { once: true });
-      setTimeout(start, 1400); /* failsafe */
-    } else {
-      start();
-    }
-  } else {
-    heroSeq.forEach(function (el) { el.classList.add('in'); });
-  }
-
-  /* ---------- scroll reveals (staged masks + lifts) ---------- */
-  var revealEls = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
+  /* current section in nav */
+  var navLinks = $$('.main-nav a');
+  if ('IntersectionObserver' in window && navLinks.length) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting) {
-          en.target.classList.add('in');
-          io.unobserve(en.target);
-        }
-      });
-    }, { threshold: 0.05, rootMargin: '0px 0px -4% 0px' });
-    revealEls.forEach(function (el) { io.observe(el); });
-    /* biztosíték: a médiaképek soha nem maradhatnak láthatatlanok.
-       Ha bármi miatt nem sült el a reveal (gyors görgetés, observer-hiba),
-       a betöltés után 2,5 mp-rel mindenképp megjelenítjük őket. */
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        revealEls.forEach(function (el) {
-          if (el.classList.contains('r-media') && !el.classList.contains('in')) el.classList.add('in');
-        });
-      }, 2500);
-    });
-  } else {
-    revealEls.forEach(function (el) { el.classList.add('in'); });
-  }
-
-  /* ---------- subtle parallax on media (compositor-only transforms) ---------- */
-  if (!reduceMotion) {
-    var pxEls = Array.prototype.slice.call(document.querySelectorAll('[data-parallax]'));
-    if (pxEls.length) {
-      var ticking = false;
-      var parallax = function () {
-        var vh = window.innerHeight;
-        pxEls.forEach(function (el) {
-          var r = el.getBoundingClientRect();
-          if (r.bottom < 0 || r.top > vh) return;
-          /* progress -0.5..0.5 across viewport */
-          var p = (r.top + r.height / 2 - vh / 2) / vh;
-          var speed = parseFloat(el.getAttribute('data-parallax')) || 0.08;
-          el.style.transform = 'translateY(' + (p * speed * 100).toFixed(2) + 'px) scale(1.08)';
-        });
-        ticking = false;
-      };
-      window.addEventListener('scroll', function () {
-        if (!ticking) { ticking = true; requestAnimationFrame(parallax); }
-      }, { passive: true });
-      parallax();
-    }
-  }
-
-  /* ---------- services: floating preview image (desktop) ---------- */
-  var floatEl = document.querySelector('.service-float');
-  var floatImg = floatEl ? floatEl.querySelector('img') : null;
-  var index = document.querySelector('.service-index');
-  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-  if (floatEl && index && canHover) {
-    var fx = 0, fy = 0, cx = 0, cy = 0, rafId = 0;
-    var loop = function () {
-      cx += (fx - cx) * 0.16;
-      cy += (fy - cy) * 0.16;
-      floatEl.style.left = cx.toFixed(1) + 'px';
-      floatEl.style.top = cy.toFixed(1) + 'px';
-      if (Math.abs(fx - cx) > 0.3 || Math.abs(fy - cy) > 0.3) {
-        rafId = requestAnimationFrame(loop);
-      } else {
-        rafId = 0; /* settle: no leaked render loop */
-      }
-    };
-    var ensureRaf = function () { if (!rafId) rafId = requestAnimationFrame(loop); };
-    index.addEventListener('mousemove', function (e) {
-      fx = e.clientX; fy = e.clientY;
-      ensureRaf();
-    });
-    index.querySelectorAll('.service-row').forEach(function (row) {
-      row.addEventListener('mouseenter', function (e) {
-        fx = e.clientX; fy = e.clientY;
-        var src = row.getAttribute('data-img');
-        if (src && floatImg.getAttribute('src') !== src) floatImg.setAttribute('src', src);
-        floatEl.classList.add('on');
-      });
-      row.addEventListener('mouseleave', function () {
-        floatEl.classList.remove('on');
-      });
-    });
-    window.addEventListener('blur', function () {
-      if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
-    });
-  }
-
-  /* ---------- mobil árlista fülek ---------- */
-  var priceGrid = document.querySelector('.price-grid');
-  var priceTabs = document.querySelector('.price-tabs');
-  if (priceGrid && priceTabs) {
-    var pBlocks = priceGrid.querySelectorAll('[data-block]');
-    var pTabs = priceTabs.querySelectorAll('.ptab');
-    var setPriceTab = function (id) {
-      pBlocks.forEach(function (b) { b.classList.toggle('is-active', b.getAttribute('data-block') === id); });
-      pTabs.forEach(function (t) {
-        var on = t.getAttribute('data-tab') === id;
-        t.classList.toggle('is-active', on);
-        t.setAttribute('aria-selected', on ? 'true' : 'false');
-      });
-    };
-    pTabs.forEach(function (t) {
-      t.addEventListener('click', function () { setPriceTab(t.getAttribute('data-tab')); });
-    });
-    setPriceTab('1');
-    priceGrid.classList.add('tab-mode');
-  }
-
-  /* ---------- fix mobil gyors-CTA sáv ---------- */
-  /* Megjelenik a hero után; ELREJTŐZIK, amíg a kapcsolat szekció vagy a lábléc látható,
-     és menü nyitva mellett is rejtett. Így semmilyen tartalmat nem takar. */
-  var ctaBar = document.querySelector('.cta-bar');
-  if (ctaBar) {
-    var heroEl = document.querySelector('.hero');
-    var showAfter = heroEl ? Math.round(heroEl.offsetHeight * 0.55) : 400;
-    var footerEl = document.querySelector('.site-footer');
-    var contactEl = document.querySelector('.contact');
-    var pastHero = false;
-    var overFooter = false;
-    var ctaUpdate = function () {
-      ctaBar.classList.toggle('show', pastHero && !overFooter);
-    };
-    /* pozíció-alapú ellenőrzés minden frame-ben (nem csak IO-ra hagyatkozunk) */
-    var ctaOnScroll = function () {
-      pastHero = window.scrollY > showAfter;
-      if (footerEl || contactEl) {
-        var vh = window.innerHeight;
-        var hidden = false;
-        [footerEl, contactEl].forEach(function (el) {
-          if (!el) return;
-          var r = el.getBoundingClientRect();
-          if (r.top < vh && r.bottom > 0) hidden = true;
-        });
-        overFooter = hidden;
-      }
-      ctaUpdate();
-    };
-    window.addEventListener('scroll', ctaOnScroll, { passive: true });
-    window.addEventListener('resize', ctaOnScroll, { passive: true });
-    ctaOnScroll();
-    /* IO csak tartalék, ha a getBoundingClientRect-mérés nem elég pontos (pl. programozott scroll) */
-    if ('IntersectionObserver' in window && (footerEl || contactEl)) {
-      var ctaIo = new IntersectionObserver(function () { ctaOnScroll(); }, { threshold: 0.05 });
-      if (footerEl) ctaIo.observe(footerEl);
-      if (contactEl) ctaIo.observe(contactEl);
-    }
-  }
-
-  /* ---------- active nav highlight ---------- */
-  var navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
-  var sections = [];
-  navLinks.forEach(function (a) {
-    var s = document.querySelector(a.getAttribute('href'));
-    if (s) sections.push({ link: a, el: s });
-  });
-  if ('IntersectionObserver' in window && sections.length) {
-    var navIo = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        var hit = sections.find(function (s) { return s.el === en.target; });
-        if (hit && en.isIntersecting) {
-          navLinks.forEach(function (l) { l.classList.remove('active'); });
-          hit.link.classList.add('active');
-        }
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        navLinks.forEach(function (a) { a.classList.toggle('is-current', a.getAttribute('href') === '#' + e.target.id); });
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    sections.forEach(function (s) { navIo.observe(s.el); });
+    navLinks.forEach(function (a) { var t = $(a.getAttribute('href')); if (t) io.observe(t); });
   }
+
+  /* mobile menu */
+  var toggle = $('.menu-toggle'), mm = $('.mobile-menu');
+  if (toggle && mm) {
+    var setMenu = function (open) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Menü bezárása' : 'Menü megnyitása');
+      mm.hidden = !open;
+    };
+    toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
+    $$('a', mm).forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+  }
+
+  /* ---------- treatment builder ---------- */
+  var tabs = $$('.b-tab'), panels = $$('.b-panel');
+  var showCat = function (cat, focus) {
+    tabs.forEach(function (t) {
+      var on = t.dataset.cat === cat;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      if (on && focus) t.focus();
+      if (on && mqMobile.matches) t.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+    });
+    panels.forEach(function (p) { var on = p.dataset.cat === cat; p.hidden = !on; p.classList.toggle('is-active', on); });
+  };
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showCat(t.dataset.cat); });
+    t.addEventListener('keydown', function (e) {
+      var d = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      showCat(tabs[(i + d + tabs.length) % tabs.length].dataset.cat, true);
+    });
+  });
+  $$('[data-goto]').forEach(function (a) {
+    a.addEventListener('click', function () { showCat(a.dataset.goto); });
+  });
+
+  var items = $$('.t-item');
+  var note = $('#uzenet'), noteCard = $('.note-card'), list = $('.note-list');
+  var empty = $('.note-empty'), totalRow = $('.note-total'), sum = $('.note-sum'), hint = $('.note-hint');
+  var send = $('.note-send'), nameIn = $('.note-name input');
+  var whens = $$('.note-when input');
+  var mOpen = $('.m-open'), mLabel = $('.m-label');
+
+  items.forEach(function (b, i) { b.dataset.idx = i; });
+  var nameOf = function (b) {
+    var n = $('.t-name', b).cloneNode(true);
+    $$('small,.tag', n).forEach(function (x) { x.remove(); });
+    return n.textContent.trim().replace(/\s+/g, ' ');
+  };
+  var catOf = function (b) { return b.closest('.b-panel').dataset.cat; };
+
+  var render = function () {
+    var sel = items.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; });
+    list.innerHTML = '';
+    var total = 0, from = false, ask = false;
+    sel.forEach(function (b) {
+      var p = +b.dataset.price || 0;
+      total += p;
+      if (b.dataset.from) from = true;
+      if (b.dataset.ask) ask = true;
+      var li = document.createElement('li');
+      var nm = document.createElement('span'); nm.textContent = nameOf(b);
+      var pr = document.createElement('b'); pr.textContent = $('.t-price', b).textContent.trim();
+      var rm = document.createElement('button'); rm.type = 'button'; rm.textContent = '×';
+      rm.setAttribute('aria-label', nameOf(b) + ' törlése');
+      rm.addEventListener('click', function () { b.setAttribute('aria-pressed', 'false'); render(); });
+      li.appendChild(nm); li.appendChild(pr); li.appendChild(rm);
+      list.appendChild(li);
+    });
+    empty.hidden = sel.length > 0;
+    totalRow.hidden = sel.length === 0;
+    sum.textContent = (from || ask ? 'kb. ' : '') + ft(total);
+    var h = [];
+    if (from) h.push('A „-tól” árak a köröm állapotától függnek.');
+    if (ask) h.push('Az UV-LED pilla árát Bogi megírja.');
+    hint.textContent = h.join(' ');
+    hint.hidden = !h.length;
+
+    /* counters on tabs */
+    tabs.forEach(function (t) {
+      var c = sel.filter(function (b) { return catOf(b) === t.dataset.cat; }).length;
+      var el = $('.b-count', t); el.textContent = c; el.classList.toggle('has', c > 0);
+    });
+
+    /* mobile bar label */
+    if (mLabel) mLabel.textContent = sel.length ? (sel.length + ' kezelés · ' + sum.textContent) : 'Időpontot kérek';
+
+    /* compose mail */
+    var lines = ['Szia Bogi!', '', 'Ezekre szeretnék időpontot kérni:'];
+    sel.forEach(function (b) { lines.push('– ' + nameOf(b) + ' (' + $('.t-price', b).textContent.trim() + ')'); });
+    if (sel.length) lines.push('', 'Összesen: ' + sum.textContent.replace(/ /g, ' '));
+    var w = whens.filter(function (x) { return x.checked; }).map(function (x) { return x.value; });
+    if (w.length) lines.push('', 'Nekem ' + w.join(', ') + ' lenne jó.');
+    lines.push('', 'Köszönöm!');
+    if (nameIn && nameIn.value.trim()) lines.push(nameIn.value.trim());
+    var subj = 'Időpontkérés' + (nameIn && nameIn.value.trim() ? ' – ' + nameIn.value.trim() : '');
+    send.href = 'mailto:bogibense@gmail.com?subject=' + encodeURIComponent(subj) + '&body=' + encodeURIComponent(lines.join('\n'));
+    send.classList.toggle('is-off', sel.length === 0);
+    send.setAttribute('aria-disabled', sel.length === 0 ? 'true' : 'false');
+  };
+
+  items.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var on = b.getAttribute('aria-pressed') !== 'true';
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      render();
+      if (on && noteCard && !mqMobile.matches) {
+        noteCard.classList.remove('bump'); void noteCard.offsetWidth; noteCard.classList.add('bump');
+      }
+    });
+  });
+  whens.forEach(function (x) { x.addEventListener('change', render); });
+  if (nameIn) nameIn.addEventListener('input', render);
+  if (send) send.addEventListener('click', function (e) { if (send.classList.contains('is-off')) e.preventDefault(); });
+
+  /* mobile sheet */
+  var backdrop = document.createElement('div');
+  backdrop.className = 'note-backdrop';
+  document.body.appendChild(backdrop);
+  var lastFocus = null;
+  var openSheet = function () {
+    if (!mqMobile.matches) { note.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    lastFocus = document.activeElement;
+    note.classList.add('is-open'); backdrop.classList.add('is-on');
+    document.documentElement.style.overflow = 'hidden';
+    setTimeout(function () { var c = $('.note-close'); if (c) c.focus(); }, 60);
+  };
+  var closeSheet = function () {
+    note.classList.remove('is-open'); backdrop.classList.remove('is-on');
+    document.documentElement.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  };
+  if (mOpen) mOpen.addEventListener('click', function () {
+    var any = items.some(function (b) { return b.getAttribute('aria-pressed') === 'true'; });
+    if (any) openSheet(); else $('#kezelesek').scrollIntoView({ behavior: 'smooth' });
+  });
+  backdrop.addEventListener('click', closeSheet);
+  var nc = $('.note-close'); if (nc) nc.addEventListener('click', closeSheet);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && note.classList.contains('is-open')) closeSheet(); });
+  mqMobile.addEventListener && mqMobile.addEventListener('change', function () { if (!mqMobile.matches) closeSheet(); });
+
+  render();
+
+  /* ---------- gallery filter ---------- */
+  var chips = $$('.w-filter .chip'), works = $$('.w-item');
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      chips.forEach(function (x) { var on = x === c; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+      var f = c.dataset.f;
+      works.forEach(function (w) {
+        var show = f === 'all' || w.dataset.k === f;
+        w.classList.toggle('is-hidden', !show);
+        if (show) { w.classList.remove('pop'); void w.offsetWidth; w.classList.add('pop'); }
+      });
+    });
+  });
+
+  /* ---------- lightbox ---------- */
+  var lb = $('.lb'), lbImg = $('.lb img'), lbCap = $('.lb figcaption');
+  var group = [], gi = 0, lbLast = null;
+  var lbShow = function () {
+    var a = group[gi];
+    var im = $('img', a);
+    lbImg.src = a.getAttribute('href');
+    lbImg.alt = im ? im.alt : '';
+    lbCap.textContent = a.dataset.cap || (im ? im.alt : '');
+  };
+  var lbOpen = function (set, i) {
+    group = set; gi = i; lbLast = document.activeElement;
+    lbShow(); lb.hidden = false; document.documentElement.style.overflow = 'hidden';
+    $('.lb-close').focus();
+  };
+  var lbClose = function () { lb.hidden = true; document.documentElement.style.overflow = ''; if (lbLast) lbLast.focus(); };
+  var bindLb = function (sel) {
+    $$(sel).forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var set = $$(sel).filter(function (x) { return !x.classList.contains('is-hidden'); });
+        lbOpen(set, set.indexOf(a));
+      });
+    });
+  };
+  if (lb) {
+    bindLb('.w-item'); bindLb('.cert');
+    $('.lb-close').addEventListener('click', lbClose);
+    $('.lb-prev').addEventListener('click', function () { gi = (gi - 1 + group.length) % group.length; lbShow(); });
+    $('.lb-next').addEventListener('click', function () { gi = (gi + 1) % group.length; lbShow(); });
+    lb.addEventListener('click', function (e) { if (e.target === lb) lbClose(); });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') lbClose();
+      if (e.key === 'ArrowLeft') $('.lb-prev').click();
+      if (e.key === 'ArrowRight') $('.lb-next').click();
+    });
+  }
+
+  /* ---------- intercom ---------- */
+  var ic = $('.intercom'), msg = $('.ic-msg'), acts = $('.ic-actions');
+  $$('.ic-key').forEach(function (k) {
+    k.addEventListener('click', function () {
+      $$('.ic-key').forEach(function (x) { x.classList.remove('is-lit', 'is-wrong'); });
+      if (k.dataset.n === '44') {
+        k.classList.add('is-lit');
+        ic.classList.remove('ring'); void ic.offsetWidth; ic.classList.add('ring');
+        msg.textContent = 'Bzzz… Bogi hallja! Hívd fel, vagy válaszd ki a kezelést, és írj neki.';
+        acts.hidden = false;
+      } else {
+        k.classList.add('is-wrong');
+        var suf = { '41': '41-es', '42': '42-es', '43': '43-as', '45': '45-ös', '46': '46-os' };
+        msg.textContent = 'A ' + (suf[k.dataset.n] || k.dataset.n) + ' nem Bogi csengője. A 44-est keresd.';
+        acts.hidden = true;
+      }
+    });
+  });
 })();
