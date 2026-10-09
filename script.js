@@ -86,8 +86,18 @@ if (/[?&]static/.test(window.location.search)) document.documentElement.classLis
           io.unobserve(en.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -4% 0px' });
     revealEls.forEach(function (el) { io.observe(el); });
+    /* biztosíték: a médiaképek soha nem maradhatnak láthatatlanok.
+       Ha bármi miatt nem sült el a reveal (gyors görgetés, observer-hiba),
+       a betöltés után 2,5 mp-rel mindenképp megjelenítjük őket. */
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        revealEls.forEach(function (el) {
+          if (el.classList.contains('r-media') && !el.classList.contains('in')) el.classList.add('in');
+        });
+      }, 2500);
+    });
   } else {
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }

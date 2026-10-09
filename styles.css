@@ -807,9 +807,10 @@ body.menu-open .mobile-menu{opacity:1; visibility:visible; pointer-events:auto; 
 
 /* telefonsáv: egy oszlop, elegánsan középre */
 @media (max-width:560px){
-  .cert-strip{grid-template-columns:1fr; max-width:340px; padding-inline:20px; margin-inline:auto}
-  .cert{transform:none}
+  .cert-strip{grid-template-columns:1fr; max-width:360px; gap:16px; padding-inline:20px; margin-inline:auto}
+  .cert{transform:none; padding:10px 10px 0}
   .cert img{object-fit:contain; background:#fff}
+  .cert figcaption{font-size:.7rem; letter-spacing:.12em; padding:9px 4px 11px}
 }
 
 @media (max-width:900px){
