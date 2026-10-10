@@ -11,7 +11,7 @@ Egyoldalas, prémium megjelenésű bemutatkozó oldal a szalon számára. Egyetl
 
 1. **Nyitó (hero)** — nagy cím, fotó, „Munkáim megtekintése" gomb
 2. **Műszempilla** — szolgáltatáslista + „Időpont egyeztetés üzenetben" gomb
-3. **UV-LED újdonság** — sötét kiemelt blokk az érdeklődéshez
+3. **UV-LED technika** — sötét kiemelt blokk: a műszempillát UV-LED technikával építi
 4. **Szolgáltatások** — 5 soros lista (műszempilla, pedikűr, arc- és testkezelés, masszázs, gyantázás)
 5. **Rólam** — Bense Boglárka bemutatása fotóval
 6. **Szakmaiság** — 6 oklevél
@@ -40,7 +40,7 @@ Egyoldalas, prémium megjelenésű bemutatkozó oldal a szalon számára. Egyetl
 
 - **Új ár beírása / árlista frissítés** — a 2026. 10. 01-i árak be vannak égetve; ha új árlista lesz, jelezzétek, beírjuk
 - **Új fotó** — csak valódi szalonfotót rakunk fel (a szolgáltatáskor keletkező képek)
-- **Új szolgáltatás blokk** — pl. ha megjön az UV-LED ára, a „egyeztetés" helyére árat írunk
+- **Új szolgáltatás blokk** — új kezelés vagy ár bármikor felkerülhet
 - **Nyitvatartás** — jelenleg NINCS az oldalon, mert nem kaptunk adatot; ha megvan, 1 blokk és megy
 
 ---
